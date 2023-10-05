@@ -12,15 +12,10 @@ startBtn.disabled = true;
 
 const options = {
   enableTime: true,
-  // Включает выбор времени
   time_24hr: true,
-  //   24-часовой режим
   defaultDate: new Date(),
-  //   Устанавливает начальную выбранную дату
   minuteIncrement: 1,
-  //   Регулирует шаг ввода минут
   onClose(selectedDates) {
-    // console.log(selectedDates[0]);
     if (selectedDates[0] < Date.now()) {
       alert('Please choose a date in the future');
     } else {
@@ -28,3 +23,20 @@ const options = {
     }
   },
 };
+
+startBtn.addEventListener('click', onStart);
+
+function onStart() {
+  startBtn.disabled = true;
+  inputEl.disabled = true;
+
+  const timerId = setInterval(() => {
+    const currentDate = Date.new();
+    const selectDate = new Date(input.value);
+    const difference = selectDate - currentDate;
+
+    if (difference < 1000) {
+      clearInterval(timerId);
+    }
+  });
+}
